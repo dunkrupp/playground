@@ -10,7 +10,9 @@ def fibonnaci(number)
   sequence << sequence[-1] + sequence[-2]
 end
 
+input = Integer(ARGF.argv[0]) || 5
+
 # @type [Array] result
-result = fibonnaci(5)
+result = fibonnaci(input)
 
 puts "The result is: #{result.sum}"
