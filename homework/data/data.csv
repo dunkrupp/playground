@@ -1,0 +1,6 @@
+1,Alice,deposit,10
+2,Bob,deposit,50
+3,Alice,deposit,30
+4,Bob,withdraw,20
+5,Alice,withdraw,25
+6,Alice,transfer,5,Bob
