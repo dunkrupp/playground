@@ -1,8 +1,5 @@
 # frozen_string_literal: true
 
-require 'json'
-require 'stringio'
-
 # @param [Array<Array>] matrix
 # @return [Integer]
 def diagonal_difference(matrix)

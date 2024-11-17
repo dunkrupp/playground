@@ -1,7 +1,8 @@
+# frozen_string_literal: true
+
 # count iterations of numbers in a row, and prefix with count.
 #   - 12          -> 1112
 #   - 11122112    -> 31222112
-
 def count_and_prefix(input_string)
   output_string = ''
   current_char = input_string[0]

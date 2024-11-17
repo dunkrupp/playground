@@ -8,6 +8,6 @@ def staircase(steps: 5)
   (1..steps).each { |i| print_step(i) }
 end
 
-steps = Integer(ARGF.argv[0])
+steps = Integer(ARGF.argv[0]) || 5
 
 staircase(steps:)

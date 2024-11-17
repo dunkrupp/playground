@@ -6,26 +6,14 @@
 # For numbers which are multiples of both three and five output
 # “FizzBuzz”.
 
-def replace_multiples(number)
-  multiple_of_three = (number % 3).zero?
-  multiple_of_five = (number % 5).zero?
-
-  if multiple_of_three && multiple_of_five
-    'FizzBuzz'
-  elsif multiple_of_three
-    'Fizz'
-  elsif multiple_of_five
-    'Buzz'
-  else
-    number
-  end
-end
-
 def fizz_buzz(n)
-  range = (1..n)
-
-  result = range.map { |number| replace_multiples(number) }
-  result.join('')
+  (1..n).map do |number|
+    result = []
+    result << 'Fizz' if (number % 3).zero?
+    result << 'Buzz' if (number % 5).zero?
+    result << number.to_s if result.empty?
+    result.join('')
+  end.join('')
 end
 
 puts fizz_buzz(15) # 12Fizz4BuzzFizz78FizzBuzz11Fizz1314FizzBuzz

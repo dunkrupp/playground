@@ -12,5 +12,4 @@ double = lambda do |n|
   n * 2
 end
 
-output = input.map(&double)
-puts output.sort
+puts input.map(&double).sort
