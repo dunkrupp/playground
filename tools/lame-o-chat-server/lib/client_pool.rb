@@ -2,7 +2,7 @@
 
 class ClientPool
   def initialize
-    @connections = {}
+    @clients = {}
   end
 
   # Adds a client to the client pool, using an symbol `id` as the key.
@@ -12,16 +12,16 @@ class ClientPool
   #   pool.add(TCPSocket.new(...))
   #
   # @param [Symbol]     id
-  # @param [TCPSocket]  connection
+  # @param [Client]  client
   # @return [ClientPool]
-  def add(id, connection)
-    @connections[id] = connection
+  def add(id, client)
+    @clients[id] = client
     self
   end
 
   # @param [Symbol] id
   def excluding(id)
-    @connections.except(id)
+    @clients.except(id)
   end
 
   # Adds a client to the client pool, using an symbol `id` as the key.
@@ -33,7 +33,7 @@ class ClientPool
   # @param [Symbol] id
   # @return [ClientPool]
   def remove(id)
-    @connections.delete(id)
+    @clients.delete(id)
     self
   end
 end

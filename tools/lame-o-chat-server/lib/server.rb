@@ -35,39 +35,38 @@ class Server
     server_listening
 
     loop do
-      client = Thread.new(Client.new(@server.accept)) do |connection|
+      @pool << Thread.new(Client.new(@server.accept)) do |client|
         puts '*' * 20
-        puts connection
-        puts connection.class.name
-        new_client_connection_established(connection)
+        puts client
+        puts client.class.name
+        new_client_connection_established(client)
 
-        connection.puts(Messages::WELCOME)
-        connection.puts(prompt)
+        client.write(Messages::WELCOME)
+        client.puts(prompt)
         command = ''
 
         while command != COMMANDS[:quit]
-          # Connection.receive
-          command, *args = connection.gets(1024).strip.split
+          # client.receive
+          command, *args = client.gets(4096).strip.split
 
           case command
           when COMMANDS[:quit]
-            # Connection.close
-            connection.puts(Messages::GOODBYE)
-            connection.close
+            # client.close
+            client.puts(Messages::GOODBYE)
+            client.close
             @logger.add(::Logger::INFO, " - [DEBUG] connection closed.\n")
             break
           when COMMANDS[:send]
-            # Connection.write
-            message = connection.gets(4096).chomp
-            connection.puts("->  #{message}")
+            # client.write
+            message = args.join(' ')
+            client.puts("->  #{message}")
             @logger.add(::Logger::INFO, message)
             break
           else
-            connection.puts("<- #{Messages::INPUT_ERROR} ")
+            client.puts("<- #{Messages::INPUT_ERROR} ")
           end
         end
       end
-      @pool.add(:client, client)
     end
   end
 
